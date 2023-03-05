@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>My To Do List</h1>
+        <div class="task-inputs">
+            <div id="short-inputs-div">
+                <input type="text" name="task-input" id="task-name" placeholder="What do you have to do?" />
+
+                <select name="" id="priority">
+                    <option value="" disabled selected hidden>Priority</option>
+                    <option value="priority1">1 (low)</option>
+                    <option value="priority2">2 (low-medium)</option>
+                    <option value="priority3">3 (medium)</option>
+                    <option value="priority4">4 (high-medium)</option>
+                    <option value="priority5">5 (high)</option>
+                </select>
+
+                <select name="" id="status">
+                    <option value="" disabled selected hidden>Status</option>
+                    <option value="status-todo">TODO</option>
+                    <option value="status-doing">DOING</option>
+                    <option value="status-done">DONE</option>
+                </select>
+
+                <input type="date" id="due-date">
+
+                <input type="text" name="category-input" id="category-input" placeholder="Category (Home, Work...)" />
+
+            </div>
+            <div id="description-input-div">
+                <textarea name="" id="description-input" cols="83" rows="4" placeholder="Important notes..."></textarea>
+            </div>
+        </div>
+
+        <div class="add-task-button">
+            <button id="add-task-button">Add task button</button>
+        </div>
+    </header>
+</body>
+
+</html>

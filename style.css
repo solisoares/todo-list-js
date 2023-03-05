@@ -1,0 +1,30 @@
+.task-inputs,
+.add-task-button  {
+    display: inline-block;
+    /* border: 1px solid; */
+    padding: 1px 1px;
+    vertical-align: middle;
+}
+
+div {
+    display: flex;
+    align-items: center;
+}
+
+button,
+select,
+input[type="text"],
+input[type="date"] {
+    /* set a fixed height */
+    height: 40px;
+    /* set a uniform padding */
+    padding: 5px;
+    /* include padding in element's height */
+    box-sizing: border-box;
+    /* add some space between elements */
+    margin-right: 5px;
+}
+
+#add-task-button {
+    height: 65px;
+}
