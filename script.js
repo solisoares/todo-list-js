@@ -1,4 +1,11 @@
+var tasksCount = 0
+
 var addTaskButton = document.getElementById("add-task-button")
+
+var removeTaskButtons = document.getElementsByClassName("remove-button")
+
+var taskList = document.getElementById("task-list")
+
 
 function getTaskName() {
     var taskName = document.getElementById("task-name").value
@@ -33,9 +40,8 @@ function getDescription() {
 }
 
 function addTask(taskName, priorityValue, statusValue, date, category, description) {
-    var taskList = document.getElementById("task-list")
     taskList.innerHTML += `
-<li>
+<li id=task-${tasksCount}>
     <div class="the-task">
         <div class="task-inputs">
             <div id="short-inputs-div">
@@ -43,19 +49,19 @@ function addTask(taskName, priorityValue, statusValue, date, category, descripti
                     disabled="true" />
 
                 <select name="" id="priority" disabled="true">
-                    <option value="" disabled ${priorityValue == ""?"selected":""}>Priority</option>
-                    <option value="priority1" ${priorityValue == "priority1"?"selected":""}>1 (low)</option>
-                    <option value="priority2" ${priorityValue == "priority2"?"selected":""}>2 (low-medium)</option>
-                    <option value="priority3" ${priorityValue == "priority3"?"selected":""}>3 (medium)</option>
-                    <option value="priority4" ${priorityValue == "priority4"?"selected":""}>4 (high-medium)</option>
-                    <option value="priority5" ${priorityValue == "priority5"?"selected":""}>5 (high)</option>
+                    <option value="" disabled ${priorityValue == "" ? "selected" : ""}>Priority</option>
+                    <option value="priority1" ${priorityValue == "priority1" ? "selected" : ""}>1 (low)</option>
+                    <option value="priority2" ${priorityValue == "priority2" ? "selected" : ""}>2 (low-medium)</option>
+                    <option value="priority3" ${priorityValue == "priority3" ? "selected" : ""}>3 (medium)</option>
+                    <option value="priority4" ${priorityValue == "priority4" ? "selected" : ""}>4 (high-medium)</option>
+                    <option value="priority5" ${priorityValue == "priority5" ? "selected" : ""}>5 (high)</option>
                 </select>
 
                 <select name="" id="status" disabled="true">
-                    <option value="" disabled  ${statusValue == ""?"selected":""}>Status</option>
-                    <option value="status-todo"  ${statusValue == "status-todo"?"selected":""}>TODO</option>
-                    <option value="status-doing" ${statusValue == "status-doing"?"selected":""}>DOING</option>
-                    <option value="status1-done" ${statusValue == "status-done"?"selected":""}>DONE</option>
+                    <option value="" disabled  ${statusValue == "" ? "selected" : ""}>Status</option>
+                    <option value="status-todo"  ${statusValue == "status-todo" ? "selected" : ""}>TODO</option>
+                    <option value="status-doing" ${statusValue == "status-doing" ? "selected" : ""}>DOING</option>
+                    <option value="status1-done" ${statusValue == "status-done" ? "selected" : ""}>DONE</option>
                 </select>
 
                 <input type="date" id="due-date" disabled="true" value="${date}">
@@ -70,12 +76,13 @@ function addTask(taskName, priorityValue, statusValue, date, category, descripti
             </div>
         </div>
         <div class="actions">
-            <button class="edit">Edit</button>
-            <button class="delete">Delete</button>
+            <button class="edit-button" id="edit-${tasksCount}">Edit</button>
+            <button class="remove-button" id="remove-${tasksCount}">Remove</button>
         </div>
     </div>
 </li>
 `
+    tasksCount++
 }
 
 addTaskButton.onclick = function () {
@@ -88,7 +95,20 @@ addTaskButton.onclick = function () {
     addTask(taskName, priorityValue, statusValue, date, category, description)
 }
 
+function generateRemoveTaskOnClick() {
+    for (let button of removeTaskButtons) {
+        button.onclick = function () {
+            var removeId = button.id
+            var taskId = removeId.replace("remove", "task")
+            var taskToRemove = document.getElementById(taskId)
+            taskToRemove.parentNode.removeChild(taskToRemove)
+        }
+    }
+}
 
-
-// Para remover list item: https://stackoverflow.com/questions/11751111/removing-li-elements-from-ul
-// Para editar:  
+document.addEventListener("click", (event) => {
+    if (event.target.tagName == "BUTTON") {
+        generateRemoveTaskOnClick()
+        console.log("teste");
+    }
+})
