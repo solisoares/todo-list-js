@@ -5,6 +5,11 @@ var addTaskButton = document.getElementById("add-task-button")
 var removeTaskButtons = document.getElementsByClassName("remove-button")
 
 var taskList = document.getElementById("task-list")
+// Populate taskList with local storage
+var taskListInnerHTMLLocalStorage = localStorage.getItem("taskListInnerHTML")
+if (taskListInnerHTMLLocalStorage) {
+    taskList.innerHTML = taskListInnerHTMLLocalStorage
+}
 
 var editTaskButton = document.getElementsByClassName("edit-button")
 var saveTaskButton = document.getElementsByClassName("save-button")
@@ -155,12 +160,11 @@ function setSaveModeOnClick() {
     }
 }
 
-
-
 document.addEventListener("click", (event) => {
     if (event.target.tagName == "BUTTON") {
         generateRemoveTaskOnClick()
         setEditModeOnClick()
         setSaveModeOnClick()
+        localStorage.setItem("taskListInnerHTML", taskList.innerHTML)
     }
 })
