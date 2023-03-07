@@ -28,3 +28,11 @@ input[type="date"] {
 #add-task-button {
     height: 65px;
 }
+
+.edit-button {
+    display: block;
+}
+
+.save-button {
+    display: none;
+}
